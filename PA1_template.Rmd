@@ -9,7 +9,7 @@ output:
 # I. Loading and preprocessing the data
 ## 1. Load the data
 ## 2. Process/transform the data if necessary
-```{r}
+```{r, echo=TRUE}
 setwd("/Users/teresayan/rprogram/course5/RepData_PeerAssessment1")
 activity <- read.csv("activity.csv",sep=",",header=TRUE,na.strings=c("NA"),skipNul=TRUE)
 ```
@@ -18,7 +18,7 @@ activity <- read.csv("activity.csv",sep=",",header=TRUE,na.strings=c("NA"),skipN
 ## 1. Make a histogram of the total number of steps taken each day
 ## 2. Calculate and report the mean and median total number of steps taken per day
 
-```{r}
+```{r, echo=TRUE}
 groups <- group_by(activity, date)
 steps <- summarize(groups, total=sum(steps,na.rm=TRUE))
 hist(steps$total,
@@ -26,12 +26,12 @@ hist(steps$total,
      xlab="total number of steps taken per day")
 ```
 
-```{r}
+```{r, echo=TRUE}
 mean(steps$total)
 ```
 ## mean is 9354.23
 
-```{r}
+```{r, echo=TRUE}
 median(steps$total)
 ```
 ## median is 10395
@@ -42,7 +42,7 @@ median(steps$total)
 ## 2. Which 5-minute interval, on average across all the days in the dataset, 
 ##    contains the maximum number of steps?
 
-```{r}
+```{r, echo=TRUE}
 par(mfrow=c(1,1))
 
 groups_interval <- group_by(activity, interval)
@@ -54,7 +54,7 @@ title(main="Average daily activity pattern")
 
 ## interval 835 contains the maximum number of steps on average which is 206.1698
 
-```{r}
+```{r, echo=TRUE}
 max_averagesteps = max(average$average_steps)
 max_averagesteps
 average$interval[average$average_steps==max_averagesteps]
@@ -62,7 +62,7 @@ average$interval[average$average_steps==max_averagesteps]
 
 # IV. Imputing missing values
 
-```{r}
+```{r, echo=TRUE}
 sum(is.na(activity$steps))
 ```
 ## 1. number of rows with NA is 2304
@@ -72,7 +72,7 @@ sum(is.na(activity$steps))
 ## dim(activity)
 ## [1] 17568     3
 
-```{r}
+```{r, echo=TRUE}
 na_index = which(is.na(activity$steps))
 ```
 
@@ -81,7 +81,7 @@ na_index = which(is.na(activity$steps))
 ## [1] 288 2
 
 ## 3. a new dataset that is equal to the original dataset but with the missing data filled in.
-```{r}
+```{r, echo=TRUE}
 for (i in 1:nrow(activity)) {
     # check if it is NA
     if (is.na(activity$steps[i])) {
@@ -96,7 +96,7 @@ for (i in 1:nrow(activity)) {
 
 ## 4. histogram of the total number of steps taken each day
 
-```{r}
+```{r, echo=TRUE}
 groups <- group_by(activity, date)
 steps <- summarize(groups, total=sum(steps,na.rm=TRUE))
 hist(steps$total,
@@ -105,12 +105,12 @@ hist(steps$total,
 ```
 
 ## What is mean total number of steps taken per day?
-```{r}
+```{r, echo=TRUE}
 mean(steps$total)
 ```
 ## mean is 10766.19 compared to previous 9354.23
 
-```{r}
+```{r, echo=TRUE}
 median(steps$total)
 ```
 ## median is 10766.19 compared to previous 10395
@@ -125,7 +125,7 @@ median(steps$total)
 ##    whether a given date is a weekday or weekend day.
 
 ## function to determine weekday or weekend
-```{r}
+```{r, echo=TRUE}
 weekdayOrWeekend <- function(s) {
     switch(s, "Sunday"="weekend",
               "Monday"="weekday",
@@ -140,14 +140,14 @@ activity$day <- sapply(activity$date, function(x) weekdayOrWeekend(weekdays(as.D
 ```
 
 ## factor variable with two levels -- "weekday" and "weekend"
-```{r}
+```{r, echo=TRUE}
 activity.f <- factor(activity$day,levels=c("weekday","weekend"),labels=c("weekday","weekend"))
 ```
 
 ## 2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and 
 ##    the average number of steps taken, averaged across all weekday days or weekend days (y-axis). 
 ## first find the average taken across all weekdays of 5-minute interval
-```{r}
+```{r, echo=TRUE}
 library(dplyr)
 activity_weekday <- filter(activity, day=='weekday')
 groups_interval_weekday <- group_by(activity_weekday, interval)
@@ -155,7 +155,7 @@ average_weekday <- summarize(groups_interval_weekday, weekday=mean(steps))
 ```
 
 ## second find the average taken across all weekends of 5-minute interval
-```{r}
+```{r, echo=TRUE}
 activity_weekend <- filter(activity, day=='weekend')
 groups_interval_weekend <- group_by(activity_weekend, interval)
 average_weekend <- summarize(groups_interval_weekend, weekend=mean(steps))

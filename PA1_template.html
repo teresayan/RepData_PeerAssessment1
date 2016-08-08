@@ -290,20 +290,8 @@ max_averagesteps
 
 <h2>2. strategy for filling in missing values in the dataset using the mean for that 5-minute interval</h2>
 
-<h2>index of rows in activity which has NA values</h2>
-
-<h2>dim(activity)</h2>
-
-<h2>[1] 17568     3</h2>
-
 <pre><code class="r">na_index = which(is.na(activity$steps))
 </code></pre>
-
-<h2>average</h2>
-
-<h2>dim(average)</h2>
-
-<h2>[1] 288 2</h2>
 
 <h2>3. a new dataset that is equal to the original dataset but with the missing data filled in.</h2>
 
@@ -350,9 +338,9 @@ hist(steps$total,
 
 <h2>yes, the mean and median have values differ from the estimates of the first part of the assignment,</h2>
 
-<h2>the impact of inputing missing data on the estimates of the total number of steps:</h2>
+<h2>the impact of imputing missing data on the estimates of the total daily number of steps:</h2>
 
-<h2>it decreases the total number of steps</h2>
+<h2>imputing missing data increases the total daily number of steps</h2>
 
 <h1>V. Are there differences in activity patterns between weekdays and weekends?</h1>
 

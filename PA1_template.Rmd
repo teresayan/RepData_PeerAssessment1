@@ -68,17 +68,9 @@ sum(is.na(activity$steps))
 ## 1. number of rows with NA is 2304
 ## 2. strategy for filling in missing values in the dataset using the mean for that 5-minute interval
 
-## index of rows in activity which has NA values
-## dim(activity)
-## [1] 17568     3
-
 ```{r, echo=TRUE}
 na_index = which(is.na(activity$steps))
 ```
-
-## average
-## dim(average)
-## [1] 288 2
 
 ## 3. a new dataset that is equal to the original dataset but with the missing data filled in.
 ```{r, echo=TRUE}
@@ -116,8 +108,8 @@ median(steps$total)
 ## median is 10766.19 compared to previous 10395
 
 ## yes, the mean and median have values differ from the estimates of the first part of the assignment, 
-## the impact of inputing missing data on the estimates of the total number of steps: 
-## it decreases the total number of steps
+## the impact of imputing missing data on the estimates of the total daily number of steps: 
+## imputing missing data increases the total daily number of steps
 
 
 # V. Are there differences in activity patterns between weekdays and weekends?
